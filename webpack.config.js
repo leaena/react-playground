@@ -3,6 +3,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 
 const TARGET = process.env.npm_lifecycle_event;
+process.env.BABEL_ENV = TARGET
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
@@ -13,6 +14,9 @@ const common = {
   entry: {
     app: PATHS.app
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
@@ -22,6 +26,11 @@ const common = {
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
+        include: PATHS.app
+      },
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel?cacheDirectory'],
         include: PATHS.app
       }
     ]
