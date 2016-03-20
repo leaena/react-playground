@@ -5,6 +5,7 @@ export default class Note extends React.Component {
     super(props);
     this.renderEdit = this.renderEdit.bind(this);
     this.renderNote = this.renderNote.bind(this);
+    this.renderDelete = this.renderDelete.bind(this);
     this.state = {
       editing: false
     };
@@ -27,7 +28,16 @@ export default class Note extends React.Component {
       onKeyPress={this.checkEnter.bind(this)} />;
   }
   renderNote() {
-    return <div onClick={this.edit.bind(this)}>{this.props.task}</div>;
+    const onDelete = this.props.onDelete;
+    return (
+      <div className="note" onClick={this.edit.bind(this)}>
+      <span>{this.props.task}</span>
+      {onDelete ? this.renderDelete() : null}
+      </div>
+    );
+  }
+  renderDelete() {
+    return <button className="delete-note" onClick={this.props.onDelete}>x</button>;
   }
   edit() {
     this.setState({

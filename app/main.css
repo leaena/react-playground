@@ -19,19 +19,29 @@ body {
 input, button {
   background: floralwhite;
   color: springgreen;
-  border: 0;
-  border-radius: 5px;
+  border: none;
   font-size: .8em;
   font-family: 'Lora', serif;
 }
 
+button:hover{
+  background: springgreen;
+  color: floralwhite;
+}
 .add-button {
   border-radius: 50%;
   margin-left: 10px;
   width: 30px;
   height: 30px;
 }
-.add-button:hover{
-    background: springgreen;
-    color: floralwhite;
+
+.note .delete-note {
+  background: springgreen;
+  color: floralwhite;
+  margin-left: 10px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.note:hover .delete-note {
+  visibility: visible;
 }

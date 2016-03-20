@@ -8,6 +8,7 @@ export default class App extends React.Component {
     super(props);
     this.addNote = this.addNote.bind(this);
     this.editNote = this.editNote.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
     this.state = {
       notes: [
         {
@@ -31,7 +32,9 @@ export default class App extends React.Component {
     return (
       <div className="container">
         <button className="add-button" onClick={this.addNote}>+</button>
-        <Notes notes={notes} onEdit={this.editNote}/>
+        <Notes notes={notes}
+          onEdit={this.editNote}
+          onDelete={this.deleteNote}/>
       </div>
     );
   }
@@ -55,5 +58,12 @@ export default class App extends React.Component {
       return note;
     });
     this.setState({notes});
+  }
+  deleteNote(id, e) {
+    e.stopPropagation();
+
+    this.setState({
+      notes: this.state.notes.filter(note => note.id !== id)
+    });
   }
 }
